@@ -17,10 +17,11 @@
     "declarationMap": true,
   },
   "files": [
-    "src/index.ts",
+    "src/index.ts"
   ],
   "include": [
-    "src/global.d.ts"
+    "src/global.d.ts",
+    "src/bin/**/*.ts"
   ],
   "exclude": [
     "node_modules",
