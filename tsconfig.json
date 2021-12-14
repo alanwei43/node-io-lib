@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "lib": [
+      "ESNext"
+    ],
+    "outDir": "dist/",
+    "moduleResolution": "Node",
+    "removeComments": false,
+    "module": "ESNext",
+    "target": "ES2015",
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationMap": true,
+  },
+  "files": [
+    "src/index.ts",
+  ],
+  "include": [
+    "src/global.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/**/*.test.ts"
+  ]
+}

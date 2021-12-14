@@ -1,0 +1,22 @@
+{
+  "TS Function Override": {
+    "prefix": "ts-fn-override",
+    "body": [
+      "export type ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Params = { }",
+      "export type ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Result = { }",
+      "export type ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Def = {",
+      "  (params: ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Params): ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Result",
+      "  __cache?: ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Result",
+      "}",
+      " ",
+      "/**",
+      " * ",
+      " * @author ${1:创建人} ",
+      " * @date $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      " */",
+      "export const ${TM_FILENAME_BASE}: ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Def = function(params: ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Params): ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Result {",
+      "}",
+    ],
+    "description": "创建 TypeScript 函数"
+  }
+}

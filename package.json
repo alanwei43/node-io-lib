@@ -1,12 +1,40 @@
 {
   "name": "node-io-lib",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "description": "NodeJS IO Library",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --config=jest.config.ts",
+    "build": "rm -rf ./dist && tsc",
+    "lint": "eslint ./ --ext .ts",
+    "pub": "tsc && npm publish --access public"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "bin": {
+    "node-io": "dist/bin/cli.js",
+    "node-io-lib": "dist/bin/cli.js"
+  },
+  "keywords": [
+    "nodejs",
+    "io",
+    "file"
+  ],
+  "author": "Alan Wei",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "colors": "^1.4.0",
+    "eslint": "^8.4.1",
+    "jest": "^27.4.5",
+    "node-fetch": "^3.1.0",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "yargs": "^17.3.0"
+  }
 }
