@@ -1,3 +1,7 @@
-logs/
+.github
 .vscode
+coverage
 src
+task
+jest.config.ts
+tsconfig.json

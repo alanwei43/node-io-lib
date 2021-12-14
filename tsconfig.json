@@ -3,8 +3,6 @@
     "allowJs": false,
     "strict": true,
     "noImplicitAny": true,
-    "noEmitOnError": true,
-    "noImplicitThis": false,
     "strictNullChecks": false,
     "lib": [
       "ESNext"
