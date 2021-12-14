@@ -10,7 +10,7 @@
     "outDir": "dist/",
     "moduleResolution": "Node",
     "removeComments": false,
-    "module": "ESNext",
+    "module": "CommonJS",
     "target": "ES2015",
     "esModuleInterop": true,
     "declaration": true,
