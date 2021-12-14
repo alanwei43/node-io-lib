@@ -2,6 +2,6 @@
 .vscode
 coverage
 src
-task
+tasks
 jest.config.ts
 tsconfig.json
