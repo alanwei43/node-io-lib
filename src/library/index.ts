@@ -1,3 +1,3 @@
 export * from "./utils/getPkgInfo";
-export * from "./core/recursiveDir";
+export * from "./core/index";
 export * from "./utils/humanSize";

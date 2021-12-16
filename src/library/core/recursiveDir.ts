@@ -1,16 +1,9 @@
 import path from "path";
 import fs from "fs";
+import type { FileInfo } from "./index"
+import { _getFileInfo } from "./_getFileInfo";
+// 4371+7756
 
-export interface FileInfo {
-  /**
-   * 文件地址
-   */
-  path: string,
-  /**
-   * 文件状态
-   */
-  stat: fs.Stats
-}
 export interface RecursiveOptions {
   /**
    * 是否递归子目录
@@ -37,34 +30,28 @@ export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array
     return files;
   }
   const dirStat = fs.statSync(rootDir);
-  files.push({
-    path: rootDir,
-    stat: dirStat
-  });
-  doList(files, rootDir, options);
+  files.push(_getFileInfo(rootDir, rootDir, dirStat));
+  doList(files, rootDir, rootDir, options);
   return files;
 }
-function doList(list: Array<FileInfo>, dir: string, options: RecursiveOptions) {
+function doList(list: Array<FileInfo>, dir: string, rootDir: string, options: RecursiveOptions) {
   const files = fs.readdirSync(dir)
     .map(f => path.join(dir, f))
-    .map(f => ({
-      stat: fs.statSync(f),
-      path: f
-    }))
+    .map(f => _getFileInfo(rootDir, f, fs.statSync(f)))
     .filter(f => {
-      if (f.stat.isDirectory() && typeof options.dirFilter === "function") {
-        return options.dirFilter(f.path);
+      if (f.state.isDirectory() && typeof options.dirFilter === "function") {
+        return options.dirFilter(f.fullPath);
       }
-      if (f.stat.isFile() && typeof options.fileFilter === "function") {
-        return options.fileFilter(f.path);
+      if (f.state.isFile() && typeof options.fileFilter === "function") {
+        return options.fileFilter(f.fullPath);
       }
       return true;
     });
 
   if (options.deepFirst) {
     if (options.recursive) {
-      files.filter(f => f.stat.isDirectory()).forEach(childDir => {
-        doList(list, childDir.path, options);
+      files.filter(f => f.state.isDirectory()).forEach(childDir => {
+        doList(list, childDir.fullPath, rootDir, options);
       });
     }
 
@@ -73,9 +60,9 @@ function doList(list: Array<FileInfo>, dir: string, options: RecursiveOptions) {
     list.splice(list.length, 0, ...files);
 
     if (options.recursive) {
-      files.filter(f => f.stat.isDirectory())
+      files.filter(f => f.state.isDirectory())
         .forEach(childDir => {
-          doList(list, childDir.path, options);
+          doList(list, childDir.fullPath, rootDir, options);
         });
     }
   }

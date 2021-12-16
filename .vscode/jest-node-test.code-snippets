@@ -16,23 +16,16 @@
     // 	"description": "Log output to console"
     // }
     "jest test": {
-        "prefix": "jest-dom-test",
+        "prefix": "jest-node-test",
         "body": [
-            "/**",
-            " * @jest-environment jsdom",
-            " */",
             " import { ${TM_FILENAME_BASE/^(\\w+).test/${1}/} } from \"../${TM_FILENAME_BASE/^(\\w+).test/${1}/}\";",
             "",
             "describe(\"${TM_FILENAME_BASE}\", () => {",
-            "    let ua: jest.SpyInstance<string, []>;",
             "    beforeEach(() => {",
-            "        ua = jest.spyOn(global.navigator, \"userAgent\", \"get\");",
             "    });",
             "    afterEach(() => {",
-            "        ua.mockRestore();",
             "    });",
-            "    test(\"测试内容\", () => {",
-            "        ua.mockReturnValue(``);",
+            "    test(\"${1}\", () => {",
             "    });",
             "});",
         ],
