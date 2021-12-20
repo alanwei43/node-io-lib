@@ -1,14 +1,15 @@
 import path from "path";
-import type { FileInfo } from "./index";
+import type { FileDirInfo } from "./index";
 
 /**
  * 生成文件信息
  */
-export function _getFileInfo(rootDir: string, fullPath: string, state: FileInfo["state"]): FileInfo {
-
+export function _getFileInfo(rootDir: string, fullPath: string, state: FileDirInfo["state"]): FileDirInfo {
   return {
     state: state,
-    "fullPath": fullPath,
+    name: path.basename(fullPath),
+    ext: state.isFile() ? path.extname(fullPath) : undefined,
+    fullPath: fullPath,
     relativePath: path.relative(rootDir, fullPath)
-  }
+  };
 }

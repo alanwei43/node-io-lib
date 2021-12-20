@@ -1,30 +1,15 @@
 import path from "path";
 import fs from "fs";
-import type { FileInfo } from "./index"
+import type { FileDirInfo } from "./index"
 import { _getFileInfo } from "./_getFileInfo";
-// 4371+7756
 
-export interface RecursiveOptions {
-  /**
-   * 是否递归子目录
-   */
-  recursive?: boolean,
-  /**
-   * 是否深度优先
-   */
-  deepFirst?: boolean,
-  /**
-   * 目录过滤
-   */
-  dirFilter?: (dir: string) => boolean,
-  /**
-   * 文件过滤
-   */
-  fileFilter?: (file: string) => boolean
-}
-
-export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array<FileInfo> {
-  const files: Array<FileInfo> = [];
+/**
+ * 递归目录及子目录下的文件
+ * @param rootDir - 需要递归的目录
+ * @param options - 选项
+ */
+export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array<FileDirInfo> {
+  const files: Array<FileDirInfo> = [];
 
   if (!fs.existsSync(rootDir)) {
     return files;
@@ -34,7 +19,7 @@ export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array
   doList(files, rootDir, rootDir, options);
   return files;
 }
-function doList(list: Array<FileInfo>, dir: string, rootDir: string, options: RecursiveOptions) {
+function doList(list: Array<FileDirInfo>, dir: string, rootDir: string, options: RecursiveOptions) {
   const files = fs.readdirSync(dir)
     .map(f => path.join(dir, f))
     .map(f => _getFileInfo(rootDir, f, fs.statSync(f)))
@@ -66,4 +51,23 @@ function doList(list: Array<FileInfo>, dir: string, rootDir: string, options: Re
         });
     }
   }
+}
+
+export interface RecursiveOptions {
+  /**
+   * 是否递归子目录
+   */
+  recursive?: boolean,
+  /**
+   * 是否深度优先
+   */
+  deepFirst?: boolean,
+  /**
+   * 目录过滤
+   */
+  dirFilter?: (dir: string) => boolean,
+  /**
+   * 文件过滤
+   */
+  fileFilter?: (file: string) => boolean
 }
