@@ -11,6 +11,6 @@ export const builder: { [key: string]: Options } = {
 };
 export const handler = function (argv: { dir: string, recursive?: boolean }) {
   for (let item of iterateFiles(argv.dir)) {
-    console.log(`[${item.state.isFile() ? "FILE" : "DIR"}] ${item.relativePath}`)
+    console.log(`[${item.state.isFile() ? "F" : "D"}] ${item.relativePath}`)
   }
 }

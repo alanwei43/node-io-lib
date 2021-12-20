@@ -1,15 +1,31 @@
 import fs from "fs";
 import path from "path";
-import type { FileInfo } from "./index";
+import type { FileDirInfo } from "./index";
 import { _getFileInfo } from "./_getFileInfo";
 
-export type IterateFileResult = Generator<FileInfo, FileInfo, IterateFileNext>;
-export type IterateFileNext = "break" | "return"
+export type IterateFileOptions = {
+  /**
+   * 迭代的目录深度
+   */
+  deep?: number
+  /**
+   * 文件/目录过滤器
+   */
+  filter?: IterateFileFilter
+}
+export type IterateFileResult = Generator<FileDirInfo, IterateFileReturn, IterateFileNext>;
+export type IterateFileReturn = void
+export type IterateFileNext = void
+export type IterateFileFilter = {
+  (f: FileDirInfo): boolean
+}
 
 /**
- * 迭代文件
+ * 迭代目录及子目录下的文件
+ * @param rootDir - 需要迭代的根目录
+ * @param options - 选项
  */
-export function* iterateFiles(rootDir: string): IterateFileResult {
+export function* iterateFiles(rootDir: string, options: IterateFileOptions = {}): IterateFileResult {
   if (typeof rootDir !== "string") {
     return;
   }
@@ -22,27 +38,27 @@ export function* iterateFiles(rootDir: string): IterateFileResult {
   rootDir = path.resolve(rootDir);
   const rootState = fs.statSync(rootDir);
   if (!rootState.isDirectory()) {
-    return _getFileInfo(rootDir, rootDir, rootState);
+    yield _getFileInfo(path.dirname(rootDir), rootDir, rootState);
+    return;
   }
 
-  yield* _doIterator(rootDir, rootDir);
-}
+  const maxDeep = typeof options.deep === "number" && options.deep > 0 ? options.deep : -1;
+  const filter: IterateFileFilter = typeof options.filter === "function" ? options.filter : _ => true;
 
-function* _doIterator(rootDir: string, dir: string): IterateFileResult {
-  for (let item of fs.readdirSync(dir, { encoding: "utf-8" })) {
-    const fullPath = path.join(dir, item);
-    const result: FileInfo = _getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
-    yield result;
-    if (result.state.isDirectory()) {
-      for (let child of _doIterator(rootDir, fullPath)) {
-        const val = yield child;
-        if (val === "break") {
-          break;
+  yield* (function* iterate(dir: string): IterateFileResult {
+    for (let item of fs.readdirSync(dir, { encoding: "utf-8" })) {
+      const fullPath = path.join(dir, item);
+      const result: FileDirInfo = _getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
+      if (filter(result)) {
+        yield result;
+      }
+      if (result.state.isDirectory() && filter(result)) {
+        const curDeep = result.relativePath.split(path.sep).filter(part => part.length > 0).length;
+        if (maxDeep > 0 && maxDeep <= curDeep) {
+          continue;
         }
-        if (val === "return") {
-          return;
-        }
+        yield* iterate(fullPath);
       }
     }
-  }
+  })(rootDir);
 }
