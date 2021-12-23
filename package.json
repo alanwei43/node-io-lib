@@ -7,7 +7,8 @@
     "test": "jest --coverage --config=jest.config.ts",
     "build": "rm -rf ./dist && tsc",
     "lint": "eslint ./ --ext .ts",
-    "pub": "tsc && npm publish --access public"
+    "pub": "tsc && npm publish --access public",
+    "cli:tree": "ts-node src/bin/cli.ts tree ./ --deep 5 --dir-exclude 'node_modules|git'"
   },
   "bin": {
     "node-io": "dist/bin/cli.js",
@@ -29,9 +30,9 @@
     "url": "https://github.com/alanwei43/node-io-lib/issues"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "node-fetch": "^3.1.0",
-    "yargs": "^17.3.0",
-    "colors": "^1.4.0"
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
@@ -45,6 +46,6 @@
     "typescript": "^4.5.4"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=10"
   }
 }

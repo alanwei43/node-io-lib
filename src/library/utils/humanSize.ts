@@ -1,34 +1,37 @@
 export type HumanSizeParams = number
+export type HumanSizeUnit = "B" | "KB" | "MB" | "GB" | "TB"
 export interface HumanSizeResult {
   size: number
-  unit: "B" | "KB" | "MB" | "GB"
+  unit: HumanSizeUnit
   str: string
+}
+export type HumanSizeDef = {
+  (size: HumanSizeParams): HumanSizeResult
+  SIZE_UNITS: Array<{ size: number, unit: HumanSizeUnit }>
 }
 
 /**
  * 大小
  * @date 2021-12-14
  */
-export function humanSize(size: HumanSizeParams): HumanSizeResult {
-  const result: HumanSizeResult = {
-    size: size,
-    unit: "B",
-    str: ""
-  };
-
-  if (size > 1024) {
-    result.size = parseFloat((size / 1024).toFixed(2));
-    result.unit = "KB";
+export const humanSize: HumanSizeDef = function (size: HumanSizeParams): HumanSizeResult {
+  for (let uz of humanSize.SIZE_UNITS) {
+    if (size > uz.size) {
+      const result: HumanSizeResult = {
+        size: parseFloat((size / uz.size).toFixed(2)),
+        unit: uz.unit,
+        str: ""
+      }
+      result.str = `${result.size}${result.unit}`;
+      return result;
+    }
   }
-
-  if (size > 1024 * 1024) {
-    result.size = parseFloat((size / (1024 * 1024)).toFixed(2));
-    result.unit = "MB";
-  }
-  if (size > 1024 * 1024 * 1024) {
-    result.size = parseFloat((size / (1024 * 1024 * 1024)).toFixed(2));
-    result.unit = "GB";
-  }
-  result.str = `${result.size}${result.unit}`;
-  return result;
 }
+
+const units: Array<HumanSizeUnit> = ["B", "KB", "MB", "GB", "TB"];
+humanSize.SIZE_UNITS = units
+  .map((unit, index) => ({
+    size: Math.pow(1024, index),
+    unit: unit
+  }))
+  .reverse();

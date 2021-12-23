@@ -16,12 +16,11 @@ describe("iterateFiles.test", () => {
 
     // 限制2级目录
     Array.from(iterateFiles(dir, { deep: 2 }))
-      .map(i => i.relativePath)
-      .forEach(item => {
-        console.log(item)
-        const deep = item.split(path.sep).length;
+      .forEach(({ relativePath, deep: itemDeep }) => {
+        const deep = relativePath.split(path.sep).length;
         expect(deep).toBeLessThan(3);
         expect(deep).toBeGreaterThan(0);
+        expect(deep).toBe(itemDeep);
       });
   });
 

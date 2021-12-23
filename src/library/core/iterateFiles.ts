@@ -53,7 +53,7 @@ export function* iterateFiles(rootDir: string, options: IterateFileOptions = {})
         yield result;
       }
       if (result.state.isDirectory() && filter(result)) {
-        const curDeep = result.relativePath.split(path.sep).filter(part => part.length > 0).length;
+        const curDeep = result.deep;
         if (maxDeep > 0 && maxDeep <= curDeep) {
           continue;
         }
