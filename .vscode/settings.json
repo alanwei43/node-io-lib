@@ -9,5 +9,10 @@
     },
     "files.associations": {
         "*.json": "jsonc"
+    },
+    "files.watcherExclude": {
+        "**/.git/**": true,
+        "**/node_modules/**": true,
+        "**/.hg/store/**": true
     }
 }
