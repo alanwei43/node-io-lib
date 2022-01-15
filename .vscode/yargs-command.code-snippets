@@ -1,0 +1,32 @@
+{
+  "yargs command": {
+    "prefix": "yargs-command",
+    "scope": "typescript",
+    "body": [
+      " import { Options } from \"yargs\";",
+      " ",
+      " export const command = \"${TM_FILENAME_BASE} [arg1]\";",
+      " export const desc = \"${1:命令概要}\";",
+      " ",
+      " type OptionType = {",
+      "   arg1: string,",
+      "   arg2?: number",
+      " }",
+      " export const builder: { [key in keyof OptionType]: Options } = {",
+      "   arg1: {",
+      "     default: \"默认值\",",
+      "     describe: \"参数描述\",",
+      "     type: \"string\"",
+      "   },",
+      "   arg2: {",
+      "     describe: \"参数描述\",",
+      "     type: \"number\"",
+      "   }",
+      " };",
+      " export const handler = function ({ }: OptionType) {",
+      " ",
+      " }"
+    ],
+    "description": "创建 yargs 命令"
+  }
+}

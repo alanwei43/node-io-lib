@@ -1,6 +1,7 @@
 {
   "TS Function Simple": {
     "prefix": "ts-fn-simple",
+    "scope": "typescript",
     "body": [
       "export type ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Params = {}",
       "export interface ${TM_FILENAME_BASE/^(\\w)(.*)/${1:/upcase}${2}/}Result { }",
