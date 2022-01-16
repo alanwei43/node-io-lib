@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs";
-import type { FileDirInfo } from "./FileDirInfo";
-import { getFileInfo } from "./getFileInfo";
+import { getFileInfo, FileInformation } from "./getFileInfo";
 
 /**
  * 递归目录及子目录下的文件
@@ -9,8 +8,8 @@ import { getFileInfo } from "./getFileInfo";
  * @param options - 选项
  * @deprecated
  */
-export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array<FileDirInfo> {
-  const files: Array<FileDirInfo> = [];
+export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array<FileInformation> {
+  const files: Array<FileInformation> = [];
 
   if (!fs.existsSync(rootDir)) {
     return files;
@@ -20,7 +19,7 @@ export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array
   doList(files, rootDir, rootDir, options);
   return files;
 }
-function doList(list: Array<FileDirInfo>, dir: string, rootDir: string, options: RecursiveOptions) {
+function doList(list: Array<FileInformation>, dir: string, rootDir: string, options: RecursiveOptions) {
   const files = fs.readdirSync(dir)
     .map(f => path.join(dir, f))
     .map(f => getFileInfo(rootDir, f, fs.statSync(f)))

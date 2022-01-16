@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
-import type { FileDirInfo } from "./FileDirInfo";
-import { getFileInfo } from "./getFileInfo";
+import { getFileInfo, FileInformation } from "./getFileInfo";
 
 export type IterateFileOptions = {
   /**
@@ -13,11 +12,11 @@ export type IterateFileOptions = {
    */
   filter?: IterateFileFilter
 }
-export type IterateFileResult = Generator<FileDirInfo, IterateFileReturn, IterateFileNext>;
+export type IterateFileResult = Generator<FileInformation, IterateFileReturn, IterateFileNext>;
 export type IterateFileReturn = void
 export type IterateFileNext = void
 export type IterateFileFilter = {
-  (f: FileDirInfo): boolean
+  (f: FileInformation): boolean
 }
 
 /**
@@ -48,7 +47,7 @@ export function* iterateFiles(rootDir: string, options: IterateFileOptions = {})
   yield* (function* iterate(dir: string): IterateFileResult {
     for (let item of fs.readdirSync(dir, { encoding: "utf-8" })) {
       const fullPath = path.join(dir, item);
-      const result: FileDirInfo = getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
+      const result: FileInformation = getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
       if (filter(result)) {
         yield result;
       }
