@@ -1,15 +1,25 @@
 import { Options } from "yargs";
 import colors from "colors";
-import { iterateFiles, humanSize, IterateFileOptions } from "../../index";
+import { iterateFiles, humanSize, IterateFileOptions, IStdOut, ProcessStdOut } from "../../index";
 
 export const command = "tree [dir]";
 export const desc = "递归列出dir目录下文件";
 
 type OptionType = {
   dir: string,
+  /**
+   * 目录最大层级
+   */
   deep?: number,
+  /**
+   * 需要包含的目录(正则表达式)
+   */
   dirInclude?: string
+  /**
+   * 需要排除的目录(正则表达式)
+   */
   dirExclude?: string
+
 }
 export const builder: { [key in keyof OptionType]: Options } = {
   dir: {
@@ -30,7 +40,8 @@ export const builder: { [key in keyof OptionType]: Options } = {
     type: "string"
   }
 };
-export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionType) {
+export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionType, print?: IStdOut) {
+  const p = print || new ProcessStdOut();
   const opts: IterateFileOptions = {
     deep: deep,
     filter: item => {
@@ -51,9 +62,8 @@ export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionTy
     const partTime = item.state.ctime.toLocaleString();
     const partSize = isFile ? humanSize(item.state.size).str : "-";
     const partPath = item.relativePath;
-    const col = isFile ? colors.green : colors.yellow;
-
-    const line = `${partTime.padStart(25, " ")} ${partSize.padStart(9, " ")} ${partPath}`;
-    console.log(col(line));
+    const col: colors.Color = isFile ? colors.green : colors.yellow;
+    const line: string = `${partTime.padStart(25, " ")} ${partSize.padStart(9, " ")} ${partPath}`;
+    p.writeln(line, col);
   }
 }

@@ -1,4 +1,2 @@
-export * from "./utils/getPkgInfo";
+export * from "./utils/index";
 export * from "./core/index";
-export * from "./utils/humanSize";
-export * from "./utils/question";

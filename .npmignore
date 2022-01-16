@@ -3,6 +3,7 @@
 coverage
 src
 tasks
+temp
 jest.config.ts
 tsconfig.json
 .eslintrc.js

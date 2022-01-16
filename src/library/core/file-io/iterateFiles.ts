@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import type { FileDirInfo } from "./index";
-import { _getFileInfo } from "./_getFileInfo";
+import type { FileDirInfo } from "./FileDirInfo";
+import { getFileInfo } from "./getFileInfo";
 
 export type IterateFileOptions = {
   /**
@@ -38,7 +38,7 @@ export function* iterateFiles(rootDir: string, options: IterateFileOptions = {})
   rootDir = path.resolve(rootDir);
   const rootState = fs.statSync(rootDir);
   if (!rootState.isDirectory()) {
-    yield _getFileInfo(path.dirname(rootDir), rootDir, rootState);
+    yield getFileInfo(path.dirname(rootDir), rootDir, rootState);
     return;
   }
 
@@ -48,7 +48,7 @@ export function* iterateFiles(rootDir: string, options: IterateFileOptions = {})
   yield* (function* iterate(dir: string): IterateFileResult {
     for (let item of fs.readdirSync(dir, { encoding: "utf-8" })) {
       const fullPath = path.join(dir, item);
-      const result: FileDirInfo = _getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
+      const result: FileDirInfo = getFileInfo(rootDir, fullPath, fs.statSync(fullPath));
       if (filter(result)) {
         yield result;
       }

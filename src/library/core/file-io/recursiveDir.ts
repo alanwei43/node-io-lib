@@ -1,12 +1,13 @@
 import path from "path";
 import fs from "fs";
-import type { FileDirInfo } from "./index"
-import { _getFileInfo } from "./_getFileInfo";
+import type { FileDirInfo } from "./FileDirInfo";
+import { getFileInfo } from "./getFileInfo";
 
 /**
  * 递归目录及子目录下的文件
  * @param rootDir - 需要递归的目录
  * @param options - 选项
+ * @deprecated
  */
 export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array<FileDirInfo> {
   const files: Array<FileDirInfo> = [];
@@ -15,14 +16,14 @@ export function recursiveDir(rootDir: string, options?: RecursiveOptions): Array
     return files;
   }
   const dirStat = fs.statSync(rootDir);
-  files.push(_getFileInfo(rootDir, rootDir, dirStat));
+  files.push(getFileInfo(rootDir, rootDir, dirStat));
   doList(files, rootDir, rootDir, options);
   return files;
 }
 function doList(list: Array<FileDirInfo>, dir: string, rootDir: string, options: RecursiveOptions) {
   const files = fs.readdirSync(dir)
     .map(f => path.join(dir, f))
-    .map(f => _getFileInfo(rootDir, f, fs.statSync(f)))
+    .map(f => getFileInfo(rootDir, f, fs.statSync(f)))
     .filter(f => {
       if (f.state.isDirectory() && typeof options.dirFilter === "function") {
         return options.dirFilter(f.fullPath);
