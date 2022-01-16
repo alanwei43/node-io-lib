@@ -7,7 +7,8 @@ export default async (): Promise<Config.InitialOptions> => {
     verbose: true,
     clearMocks: true,
     testMatch: [
-      "<rootDir>/src/**/__tests__/**/*test.ts"
+      "<rootDir>/src/**/__tests__/**/*.test.ts",
+      "<rootDir>/src/**/__tests__/**/*.spec.ts",
     ],
     testPathIgnorePatterns: ["/node_modules/"],
   };
