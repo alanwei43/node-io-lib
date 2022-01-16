@@ -26,6 +26,7 @@ export const humanSize: HumanSizeDef = function (size: HumanSizeParams): HumanSi
       return result;
     }
   }
+  return { size: size, unit: "B", str: `${size}B` };
 }
 
 const units: Array<HumanSizeUnit> = ["B", "KB", "MB", "GB", "TB"];
