@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import colors from "colors";
 import { Options } from "yargs";
-import { question, ProcessStdOut } from "../../index";
+import { question, ProcessStdOut, removeDirectory } from "../../index";
 
 export const command = "rm [dir]";
 export const desc = "删除文件或目录";
@@ -41,7 +41,7 @@ export const handler = async function ({ dir, yes }: OptionType) {
   const stat = fs.statSync(target);
   if (stat.isDirectory()) {
     // 执行目录删除
-    fs.rmSync(target, {
+    removeDirectory(target, {
       retryDelay: 300,
       recursive: true,
       maxRetries: 10,

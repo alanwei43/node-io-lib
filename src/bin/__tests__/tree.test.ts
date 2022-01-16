@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { handler } from "../commands/tree";
-import { ArrayStdOut } from "../../index";
+import { ArrayStdOut, removeDirectory } from "../../index";
 
 describe("tree.test", () => {
   let root = path.join("temp", "tree-" + Date.now());
@@ -19,7 +19,7 @@ describe("tree.test", () => {
     fs.writeFileSync(path.join(root, "child2", "child2-nest", "style.css"), "body {color: green}", { encoding: "utf-8" });
   });
   afterAll(() => {
-    fs.rmSync(root, { recursive: true });
+    removeDirectory(root, { recursive: true });
   });
   test("正确列出所有文件", () => {
     const std: ArrayStdOut = ArrayStdOut.of();
