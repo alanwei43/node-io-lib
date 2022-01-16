@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import colors from "colors";
-import { question } from "../../index";
 import { Options } from "yargs";
+import { question, ProcessStdOut } from "../../index";
 
 export const command = "rm [dir]";
 export const desc = "删除文件或目录";
@@ -25,9 +25,10 @@ export const builder: { [key in keyof OptionType]: Options } = {
   }
 };
 export const handler = async function ({ dir, yes }: OptionType) {
+  const p = new ProcessStdOut();
   const target = path.resolve(dir);
   if (!fs.existsSync(target)) {
-    console.log(colors.red(`文件/目录 ${target} 不存在`));
+    p.writeln(`文件/目录 ${target} 不存在`, colors.red);
     return;
   }
 
@@ -45,14 +46,13 @@ export const handler = async function ({ dir, yes }: OptionType) {
       recursive: true,
       maxRetries: 10,
     });
-    console.log(colors.green(`${target} 删除成功`));
+    p.writeln(`${target} 删除成功`, colors.green);
     return;
   }
   if (stat.isFile()) {
     fs.unlinkSync(target);
-    console.log(colors.green(`${target} 删除成功`));
+    p.writeln(`${target} 删除成功`, colors.green);
     return;
   }
-  console.log(colors.green(`${target} 不是文件/目录, 删除失败.`));
-
+  p.writeln(`${target} 不是文件/目录, 删除失败.`, colors.green);
 }
