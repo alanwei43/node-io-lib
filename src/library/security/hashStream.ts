@@ -1,6 +1,6 @@
 import crypto, { BinaryToTextEncoding } from "crypto";
 import { EventEmitter } from "events";
-import { Emitter } from "./Emitter";
+import { Emitter } from "../utils/Emitter";
 
 export type HashStreamReader = {
   data: Buffer

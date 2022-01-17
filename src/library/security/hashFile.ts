@@ -1,6 +1,6 @@
 import fs from "fs";
 import { EventEmitter } from "events";
-import { Emitter } from "./Emitter";
+import { Emitter } from "../utils/Emitter";
 import { hashStream, HashCalculateOptions, HashStreamReader, HashStreamResultEvents, HashStreamResult } from "./hashStream";
 
 export type HashFileOptions = {
