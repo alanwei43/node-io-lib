@@ -28,7 +28,7 @@ export const handler = async function ({ dir, yes }: OptionType) {
   const p = new ProcessStdOut();
   const target = path.resolve(dir);
   if (!fs.existsSync(target)) {
-    p.writeln(`文件/目录 ${target} 不存在`, colors.red);
+    p.writeln(`文件/目录 ${target} 不存在`, colors.yellow);
     return;
   }
 

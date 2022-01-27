@@ -4,7 +4,8 @@ import { handler } from "../commands/tree";
 import { ArrayStdOut, removeDirectory } from "../../index";
 
 describe("tree.test", () => {
-  let root = path.join("temp", "tree-" + Date.now());
+  const root = path.join("temp", "tree-" + Date.now());
+  const sep = path.sep;
   beforeAll(() => {
     fs.mkdirSync(root);
     fs.writeFileSync(path.join(root, "hello.txt"), "hello world.", { encoding: "utf-8" });
@@ -27,13 +28,13 @@ describe("tree.test", () => {
       dir: path.resolve(root)
     }, std);
     const lines = std.getPrints();
-    expect(lines.length).toEqual(7);
+    expect(lines.length).toEqual(8);
     expect(lines[0].text).toContain("- child1");
-    expect(lines[1].text).toContain("2B child1/config.json");
+    expect(lines[1].text).toContain(`2B child1${sep}config.json`);
     expect(lines[2].text).toContain("- child2");
-    expect(lines[3].text).toContain("- child2/child2-nest");
-    expect(lines[4].text).toContain("19B child2/child2-nest/style.css");
-    expect(lines[5].text).toContain("25B child2/think.ts");
+    expect(lines[3].text).toContain(`- child2${sep}child2-nest`);
+    expect(lines[4].text).toContain(`19B child2${sep}child2-nest${sep}style.css`);
+    expect(lines[5].text).toContain(`25B child2${sep}think.ts`);
     expect(lines[6].text).toContain("12B hello.txt");
   });
   test("限制层级", () => {
@@ -43,7 +44,7 @@ describe("tree.test", () => {
       deep: 1
     }, std);
     const lines = std.getPrints();
-    expect(lines.length).toEqual(3);
+    expect(lines.length).toEqual(4);
     expect(lines[0].text).toContain("- child1");
     expect(lines[1].text).toContain("- child2");
     expect(lines[2].text).toContain("12B hello.txt");
@@ -55,9 +56,9 @@ describe("tree.test", () => {
       "dirExclude": "child2"
     }, std);
     const lines = std.getPrints();
-    expect(lines.length).toEqual(3);
+    expect(lines.length).toEqual(4);
     expect(lines[0].text).toContain("- child1");
-    expect(lines[1].text).toContain("2B child1/config.json");
+    expect(lines[1].text).toContain(`2B child1${sep}config.json`);
     expect(lines[2].text).toContain("12B hello.txt");
   });
   test("包含特定文件夹", () => {
@@ -67,11 +68,11 @@ describe("tree.test", () => {
       "dirInclude": "child2"
     }, std);
     const lines = std.getPrints();
-    expect(lines.length).toEqual(5);
+    expect(lines.length).toEqual(6);
     expect(lines[0].text).toContain("- child2");
-    expect(lines[1].text).toContain("- child2/child2-nest");
-    expect(lines[2].text).toContain("19B child2/child2-nest/style.css");
-    expect(lines[3].text).toContain("25B child2/think.ts");
+    expect(lines[1].text).toContain(`- child2${sep}child2-nest`);
+    expect(lines[2].text).toContain(`19B child2${sep}child2-nest${sep}style.css`);
+    expect(lines[3].text).toContain(`25B child2${sep}think.ts`);
     expect(lines[4].text).toContain("12B hello.txt");
   });
 });

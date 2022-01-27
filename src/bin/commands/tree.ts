@@ -29,18 +29,25 @@ export const builder: { [key in keyof OptionType]: Options } = {
   },
   deep: {
     describe: "目录深度",
-    type: "number"
+    type: "number",
+    alias: "d"
   },
   dirInclude: {
     describe: "仅包含的目录",
-    type: "string"
+    type: "string",
+    alias: "i"
   },
   dirExclude: {
     describe: "需要排除的目录",
-    type: "string"
+    type: "string",
+    alias: "e"
   }
 };
 export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionType, print?: IStdOut) {
+  let totalSize: number = 0;
+  let totalFileCount: number = 0;
+  let totalDirCount: number = 0;
+
   const p = print || new ProcessStdOut();
   const opts: IterateFileOptions = {
     deep: deep,
@@ -65,5 +72,12 @@ export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionTy
     const col: colors.Color = isFile ? colors.green : colors.yellow;
     const line: string = `${partTime.padStart(25, " ")} ${partSize.padStart(9, " ")} ${partPath}`;
     p.writeln(line, col);
+    if (isFile) {
+      totalSize += item.state.size;
+      totalFileCount++;
+    } else {
+      totalDirCount++;
+    }
   }
+  p.writeln(`${totalDirCount}个目录, ${totalFileCount}个文件, 全部文件大小:${humanSize(totalSize).str}`);
 }
