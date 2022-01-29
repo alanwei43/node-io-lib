@@ -9,6 +9,7 @@ type OptionType = {
   text?: string
   file?: string
   directory?: string
+  algorithm?: string
 }
 export const builder: { [key in keyof OptionType]: Options } = {
   text: {
@@ -24,12 +25,20 @@ export const builder: { [key in keyof OptionType]: Options } = {
     describe: "计算目录下所有文件的hash",
     type: "string",
     alias: "d"
+  },
+  algorithm: {
+    description: "hash算法",
+    type: "string",
+    alias: "a",
+    choices: ["md5", "sha256", "sha512"],
+    requiresArg: false,
+    default: "md5"
   }
 };
-export const handler = async function ({ text, file, directory }: OptionType) {
+export const handler = async function ({ text, file, directory, algorithm }: OptionType) {
   const print = new ProcessStdOut();
   if (text) {
-    const hashValue = hashText(text, { algorithm: "md5" });
+    const hashValue = hashText(text, { algorithm: algorithm || "md5" });
     print.writeln(`[文本] ${text} \n${hashValue}`, colors.green);
     return;
   }
