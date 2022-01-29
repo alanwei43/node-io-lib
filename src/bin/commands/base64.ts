@@ -1,5 +1,4 @@
 import fs from "fs";
-import path from "path";
 import { Options } from 'yargs';
 import { red } from "colors";
 import { ProcessStdOut, encodeBase64, decodeBase64 } from "../../index";
