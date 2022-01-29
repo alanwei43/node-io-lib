@@ -30,7 +30,7 @@ export const handler = async function ({ text, file, directory }: OptionType) {
   const print = new ProcessStdOut();
   if (text) {
     const hashValue = hashText(text, { algorithm: "md5" });
-    print.writeln(hashValue + "", colors.green);
+    print.writeln(`[文本] ${text} \n${hashValue}`, colors.green);
     return;
   }
   if (file) {
@@ -40,7 +40,7 @@ export const handler = async function ({ text, file, directory }: OptionType) {
         digest: "hex"
       }
     }).promise;
-    print.writeln(hashValue + "", colors.green);
+    print.writeln(`[文件] ${file} \n${hashValue}`, colors.green);
     return;
   }
   if (directory) {

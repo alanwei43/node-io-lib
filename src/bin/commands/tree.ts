@@ -44,9 +44,9 @@ export const builder: { [key in keyof OptionType]: Options } = {
   }
 };
 export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionType, print?: IStdOut) {
-  let totalSize: number = 0;
-  let totalFileCount: number = 0;
-  let totalDirCount: number = 0;
+  let totalSize = 0;
+  let totalFileCount = 0;
+  let totalDirCount = 0;
 
   const p = print || new ProcessStdOut();
   const opts: IterateFileOptions = {
@@ -63,14 +63,14 @@ export const handler = function ({ dir, deep, dirInclude, dirExclude }: OptionTy
       return true;
     }
   };
-  for (let item of iterateFiles(dir, opts)) {
+  for (const item of iterateFiles(dir, opts)) {
     const isFile = item.state.isFile();
 
     const partTime = item.state.ctime.toLocaleString();
     const partSize = isFile ? humanSize(item.state.size).str : "-";
     const partPath = item.relativePath;
     const col: colors.Color = isFile ? colors.green : colors.yellow;
-    const line: string = `${partTime.padStart(25, " ")} ${partSize.padStart(9, " ")} ${partPath}`;
+    const line = `${partTime.padStart(25, " ")} ${partSize.padStart(9, " ")} ${partPath}`;
     p.writeln(line, col);
     if (isFile) {
       totalSize += item.state.size;

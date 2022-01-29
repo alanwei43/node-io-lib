@@ -13,7 +13,8 @@
     "cli:hash-text": "ts-node src/bin/cli.ts hash 'hello world.'",
     "cli:hash-file": "ts-node src/bin/cli.ts hash -f 'temp/README.md'",
     "cli:hash-dir": "ts-node src/bin/cli.ts hash -d 'src'",
-    "cli:base64": "ts-node src/bin/cli.ts base64 hello"
+    "cli:base64": "ts-node src/bin/cli.ts base64 hello",
+    "cli:concat": "ts-node src/bin/cli.ts concat src temp/concat.txt -f"
   },
   "bin": {
     "node-io": "dist/bin/cli.js",
