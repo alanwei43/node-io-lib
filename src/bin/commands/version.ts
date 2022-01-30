@@ -47,7 +47,7 @@ export const handler = function ({ value }: OptionType) {
   }
 
   if (!newVersion) {
-    print.writeln(`输入不合法: ${value}`);
+    print.writeln(`输入不合法 ${value || ""}`, colors.red);
     return;
   }
 

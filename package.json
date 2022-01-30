@@ -15,7 +15,7 @@
     "cli:hash-dir": "ts-node src/bin/cli.ts hash -d 'src'",
     "cli:base64": "ts-node src/bin/cli.ts base64 hello",
     "cli:concat": "ts-node src/bin/cli.ts concat src temp/concat.txt -f",
-    "cli:version": "ts-node src/bin/cli.ts version patch"
+    "cli:version": "ts-node src/bin/cli.ts version"
   },
   "bin": {
     "node-io": "dist/bin/cli.js",
