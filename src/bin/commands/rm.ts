@@ -41,11 +41,7 @@ export const handler = async function ({ dir, yes }: OptionType) {
   const stat = fs.statSync(target);
   if (stat.isDirectory()) {
     // 执行目录删除
-    removeDirectory(target, {
-      retryDelay: 300,
-      recursive: true,
-      maxRetries: 10,
-    });
+    removeDirectory(target);
     p.writeln(`${target} 删除成功`, colors.green);
     return;
   }

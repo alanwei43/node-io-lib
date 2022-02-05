@@ -13,7 +13,7 @@ type OptionType = {
 export const builder: { [key in keyof OptionType]: Options } = {
   value: {
     requiresArg: false,
-    description: '版本号',
+    description: '版本号(可选值: major, minor, patch)',
     type: 'string'
   }
 };
