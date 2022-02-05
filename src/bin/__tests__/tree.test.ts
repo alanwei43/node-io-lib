@@ -20,7 +20,7 @@ describe("tree.test", () => {
     fs.writeFileSync(path.join(root, "child2", "child2-nest", "style.css"), "body {color: green}", { encoding: "utf-8" });
   });
   afterAll(() => {
-    removeDirectory(root, { recursive: true });
+    removeDirectory(root);
   });
   test("正确列出所有文件", () => {
     const std: ArrayStdOut = ArrayStdOut.of();
