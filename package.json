@@ -15,7 +15,8 @@
     "cli:hash-dir": "ts-node src/bin/cli.ts hash -d 'src'",
     "cli:base64": "ts-node src/bin/cli.ts base64 hello",
     "cli:concat": "ts-node src/bin/cli.ts concat src temp/concat.txt -f",
-    "cli:version": "ts-node src/bin/cli.ts version"
+    "cli:version": "ts-node src/bin/cli.ts version",
+    "cli:ip": "ts-node src/bin/cli.ts ip"
   },
   "bin": {
     "node-io": "dist/bin/cli.js",
@@ -38,12 +39,13 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^2.6.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
+    "@types/node-fetch": "^2.6.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "eslint": "^8.4.1",
