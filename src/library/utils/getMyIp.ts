@@ -13,6 +13,7 @@ export async function getMyIp(timeout?: number): Promise<Array<GetMyIpItem>> {
     "https://bot.whatismyipaddress.com",
     "https://ipinfo.io/ip",
     "https://ipecho.net/plain",
+    "https://alanwei.azurewebsites.net/api/tool/ip"
   ];
 
   const list: Array<GetMyIpItem> = [];
