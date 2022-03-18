@@ -10,7 +10,6 @@ export async function getMyIp(timeout?: number): Promise<Array<GetMyIpItem>> {
     "https://icanhazip.com",
     "https://ifconfig.me/all.json",
     "https://api.ipify.org",
-    "https://bot.whatismyipaddress.com",
     "https://ipinfo.io/ip",
     "https://ipecho.net/plain",
     "https://alanwei.azurewebsites.net/api/tool/ip"
@@ -43,10 +42,7 @@ function req(url: string, timeout: number): Promise<string> {
       .then(data => {
         if (resolved) { return; }
         resolved = true;
-        resolve(data
-          .replace(/\n/g, "")
-          .replace(/\t/g, " ")
-          .replace(/ {,2}/g, " "));
+        resolve(data.replace(/\s/g, ""));
       })
       .catch(err => resolve(err.message));
 
