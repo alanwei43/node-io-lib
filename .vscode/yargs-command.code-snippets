@@ -7,7 +7,7 @@
       " import { Options } from 'yargs'; ",
       "  ",
       " export const command = '${TM_FILENAME_BASE} [input]'; ",
-      " export const desc = '编码/解码 Base64'; ",
+      " export const desc = '命令简介'; ",
       "  ",
       " type OptionType = { ",
       "   input: string, ",
