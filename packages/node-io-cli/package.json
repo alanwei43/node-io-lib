@@ -7,7 +7,7 @@
     "test": "jest --coverage --config=jest.config.ts",
     "build": "rm -rf ./dist && tsc",
     "lint": "eslint ./ --ext .ts",
-    "pub": "npm publish --access public",
+    "pub": "npm publish",
     "cli:tree": "ts-node src/bin/cli.ts tree ./ --deep 5 --dir-exclude 'node_modules|git'",
     "cli:rm": "ts-node src/bin/cli.ts rm dist",
     "cli:hash-text": "ts-node src/bin/cli.ts hash 'hello world.'",
@@ -29,7 +29,10 @@
   ],
   "author": "Alan Wei",
   "license": "ISC",
-  "publishConfig": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alanwei43/node-io-lib.git"
