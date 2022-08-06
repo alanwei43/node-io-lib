@@ -1,6 +1,6 @@
 import { Options } from 'yargs';
 import { ProcessStdOut } from '../../library/std-io';
-import { getMyIp } from "../../library/utils/index";
+import { getMyIp } from "node-io-core";
 import colors from "colors";
 
 export const command = 'ip [timeout]';
@@ -17,7 +17,7 @@ export const builder: { [key in keyof OptionType]: Options } = {
 export const handler = async function ({ timeout }: OptionType) {
   const p = new ProcessStdOut();
   const list = await getMyIp(timeout);
-  for (let item of list) {
+  for (const item of list) {
     p.writeln(`source: ${item.source}, cost: ${item.cost}ms`);
     p.write("IP: ");
     p.write(item.ip, colors.green);

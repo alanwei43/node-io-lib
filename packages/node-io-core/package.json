@@ -1,0 +1,44 @@
+{
+  "name": "node-io-core",
+  "version": "0.1.0",
+  "description": "NodeJS IO Library",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "test": "jest --coverage --config=jest.config.ts",
+    "build": "rm -rf ./dist && tsc",
+    "lint": "eslint ./ --ext .ts",
+    "publish": "npm run build && npm publish --access public"
+  },
+  "keywords": [
+    "io",
+    "file"
+  ],
+  "author": "Alan Wei",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanwei43/node-io-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alanwei43/node-io-lib/issues"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.4.1",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}

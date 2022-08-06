@@ -1,5 +1,9 @@
-# NodeJS IO Library
+Node IO 类库
 
-![publish](https://github.com/alanwei43/node-io-lib/actions/workflows/npm-publish.yml/badge.svg)
+## node-io-core 
 
-NodeJS IO 类库 
+IO 核心类库
+
+## node-io-cli
+
+IO 命令行类库

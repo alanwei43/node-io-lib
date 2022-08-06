@@ -1,51 +1,22 @@
 {
-  "name": "node-io-lib",
-  "version": "0.0.22",
-  "description": "NodeJS IO Library",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "jest --coverage --config=jest.config.ts",
-    "build": "ts-node src/bin/cli.ts rm -y dist && tsc",
-    "lint": "eslint ./ --ext .ts",
-    "pub": "tsc && npm publish --access public",
-    "cli:tree": "ts-node src/bin/cli.ts tree ./ --deep 5 --dir-exclude 'node_modules|git'",
-    "cli:rm": "ts-node src/bin/cli.ts rm dist",
-    "cli:hash-text": "ts-node src/bin/cli.ts hash 'hello world.'",
-    "cli:hash-file": "ts-node src/bin/cli.ts hash -f 'temp/README.md'",
-    "cli:hash-dir": "ts-node src/bin/cli.ts hash -d 'src'",
-    "cli:base64": "ts-node src/bin/cli.ts base64 hello",
-    "cli:concat": "ts-node src/bin/cli.ts concat src temp/concat.txt -f",
-    "cli:version": "ts-node src/bin/cli.ts version",
-    "cli:ip": "ts-node src/bin/cli.ts ip"
-  },
-  "bin": {
-    "node-io": "dist/bin/cli.js",
-    "node-io-lib": "dist/bin/cli.js"
-  },
-  "keywords": [
-    "nodejs",
-    "io",
-    "file"
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "Alan Wei",
-  "license": "ISC",
-  "publishConfig": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alanwei43/node-io-lib.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alanwei43/node-io-lib/issues"
-  },
-  "dependencies": {
-    "colors": "1.4.0",
-    "node-fetch": "^2.6.1",
-    "yargs": "^16.2.0"
+  "scripts": {
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "login": "npm adduser",
+    "publish": "npm run build && lerna publish"
   },
   "devDependencies": {
+    "lerna": "^5.1.8",
+    "nx": "^14.4.3",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
-    "@types/node-fetch": "^2.6.1",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "eslint": "^8.4.1",
@@ -54,10 +25,9 @@
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
-  "resolutions": {
-    "**/colors": "1.4.0"
-  },
-  "engines": {
-    "node": ">=10"
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*/jest.config.js"
+    ]
   }
 }

@@ -1,6 +1,7 @@
 import { Options } from "yargs";
 import colors from "colors";
-import { ProcessStdOut, hashText, hashFile, iterateFiles } from "../../index";
+import { ProcessStdOut } from "../../index";
+import { hashText, hashFile, iterateFiles } from "node-io-core";
 
 export const command = "hash [text]";
 export const desc = "计算hash";

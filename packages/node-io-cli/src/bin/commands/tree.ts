@@ -1,6 +1,7 @@
 import { Options } from "yargs";
 import colors from "colors";
-import { iterateFiles, humanSize, IterateFileOptions, IStdOut, ProcessStdOut } from "../../index";
+import { IStdOut, ProcessStdOut } from "../../index";
+import { iterateFiles, humanSize, IterateFileOptions, } from "node-io-core";
 
 export const command = "tree [dir]";
 export const desc = "递归列出dir目录下文件";

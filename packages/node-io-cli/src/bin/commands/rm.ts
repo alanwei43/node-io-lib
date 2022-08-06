@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 import colors from "colors";
 import { Options } from "yargs";
-import { question, ProcessStdOut, removeDirectory } from "../../index";
+import { ProcessStdOut } from "../../index";
+import { question, removeDirectory } from "node-io-core";
 
 export const command = "rm [dir]";
 export const desc = "删除文件或目录";

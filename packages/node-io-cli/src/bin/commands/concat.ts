@@ -1,7 +1,8 @@
 import { Options } from 'yargs';
 import fs from "fs";
 import colors from "colors";
-import { iterateFiles, ProcessStdOut, humanSize } from '../../index';
+import { ProcessStdOut } from '../../index';
+import { iterateFiles, humanSize } from 'node-io-core';
 
 export const command = 'concat [dir] [dest]';
 export const desc = '合并指定目录下的所有文件';

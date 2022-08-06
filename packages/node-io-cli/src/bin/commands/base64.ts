@@ -1,7 +1,8 @@
 import fs from "fs";
 import { Options } from 'yargs';
 import { red } from "colors";
-import { ProcessStdOut, encodeBase64, decodeBase64 } from "../../index";
+import { ProcessStdOut, } from "../../index";
+import { encodeBase64, decodeBase64 } from "node-io-core";
 
 export const command = 'base64 [input]';
 export const desc = '编码/解码 Base64';

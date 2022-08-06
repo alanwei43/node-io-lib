@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { handler } from "../commands/tree";
-import { ArrayStdOut, removeDirectory } from "../../index";
+import { ArrayStdOut } from "../../index";
+import { removeDirectory } from "node-io-core";
 
 describe("tree.test", () => {
   const root = path.join("temp", "tree-" + Date.now());
