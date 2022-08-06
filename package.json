@@ -11,7 +11,7 @@
     "test": "lerna run test",
     "login": "npm adduser",
     "publish": "npm run build && npm run test && lerna publish patch",
-    "version:patch": "lerna version patch --no-push"
+    "version:patch": "lerna version patch --no-push --yes"
   },
   "devDependencies": {
     "lerna": "^5.1.8",
