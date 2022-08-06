@@ -1,6 +1,6 @@
 {
   "name": "node-io-cli",
-  "version": "0.0.22",
+  "version": "0.1.0",
   "description": "NodeJS IO Library",
   "main": "dist/src/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "bin": {
     "node-io": "dist/src/bin/cli.js",
-    "node-io-lib": "dist/src/bin/cli.js"
+    "node-io-cli": "dist/src/bin/cli.js"
   },
   "keywords": [
     "io",
