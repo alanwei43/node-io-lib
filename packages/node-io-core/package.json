@@ -1,6 +1,6 @@
 {
   "name": "node-io-core",
-  "version": "0.1.0",
+  "version": "1.0.28",
   "description": "NodeJS IO Library",
   "main": "dist/src/index.js",
   "scripts": {
@@ -24,8 +24,6 @@
   },
   "bugs": {
     "url": "https://github.com/alanwei43/node-io-lib/issues"
-  },
-  "dependencies": {
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
