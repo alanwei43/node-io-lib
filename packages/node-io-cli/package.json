@@ -7,6 +7,7 @@
     "test": "jest --coverage --config=jest.config.ts",
     "build": "rm -rf ./dist && tsc",
     "lint": "eslint ./ --ext .ts",
+    "pub": "npm publish --access public",
     "cli:tree": "ts-node src/bin/cli.ts tree ./ --deep 5 --dir-exclude 'node_modules|git'",
     "cli:rm": "ts-node src/bin/cli.ts rm dist",
     "cli:hash-text": "ts-node src/bin/cli.ts hash 'hello world.'",
