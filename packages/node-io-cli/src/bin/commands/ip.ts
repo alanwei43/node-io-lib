@@ -1,6 +1,6 @@
 import { Options } from 'yargs';
 import { ProcessStdOut } from '../../library/std-io';
-import { getMyIp } from "node-io-core";
+import { getMyIp } from "../../library/getMyIp";
 import colors from "colors";
 
 export const command = 'ip [timeout]';

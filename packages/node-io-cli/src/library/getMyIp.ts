@@ -17,7 +17,7 @@ export async function getMyIp(timeout?: number): Promise<Array<GetMyIpItem>> {
 
   const list: Array<GetMyIpItem> = [];
   const to = timeout || 5000;
-  for (let svr of services) {
+  for (const svr of services) {
     const start = Date.now();
     const ip = await req(svr, to);
     const end = Date.now();
@@ -32,7 +32,7 @@ export async function getMyIp(timeout?: number): Promise<Array<GetMyIpItem>> {
 
 function req(url: string, timeout: number): Promise<string> {
   return new Promise((resolve, reject) => {
-    let resolved: boolean = false;
+    let resolved = false;
     fetch(url, {
       headers: {
         "User-Agent": "curl"
