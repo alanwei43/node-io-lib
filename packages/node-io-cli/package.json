@@ -1,6 +1,6 @@
 {
   "name": "node-io-cli",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "NodeJS IO Library",
   "main": "dist/src/index.js",
   "scripts": {
@@ -43,7 +43,7 @@
   "dependencies": {
     "colors": "1.4.0",
     "node-fetch": "^2.6.1",
-    "node-io-core": "^1.0.30",
+    "node-io-core": "^1.0.31",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
